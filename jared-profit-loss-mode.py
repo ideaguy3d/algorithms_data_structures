@@ -15,9 +15,12 @@ mode_cost_per_click_amount = mode_cost_per_click[1][0];
 median_cost_per_click = np.median(jared_cost_per_click);
 mean_cost_per_click = np.average(jared_cost_per_click);
 
-print("The mode = " + str(mode_cost_per_click_raw)
-      + ", amout of times it occurs = " + str(mode_cost_per_click_amount));
-
+print(
+	"The mode = " + str(mode_cost_per_click_raw) +
+	", amout of times it occurs = " + str(mode_cost_per_click_amount) +
+	", the mean = " + str(round(mean_cost_per_click, 3)) +
+	", the median = " + str(round(median_cost_per_click, 3))
+);
 
 plot.hist(jared_cost_per_click, range=(0.000, 0.200), bins=14, edgecolor='red');
 plot.title("Jared's cost per piece data");
@@ -34,9 +37,6 @@ plot.axvline(
 );
 plot.legend();
 plot.show();
-
-
-
 
 
 
