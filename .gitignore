@@ -18,3 +18,4 @@ python-getting-started
 resources-names
 core-py/*.csv
 csv
+.DS_STORE
