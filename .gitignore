@@ -5,7 +5,6 @@
 build/*
 config/settings.yml
 app.yaml
-.idea
 pmod-app/csv/*
 **/**/*.png
 vids
@@ -20,3 +19,4 @@ core-py/*.csv
 csv
 .DS_STORE
 .DS_Store
+**/**/**/*.R
