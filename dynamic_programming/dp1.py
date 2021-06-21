@@ -13,8 +13,8 @@ def fibonacci_dp(n):
         cache[n] = fibonacci_dp(n - 1) + fibonacci_dp(n - 2)
     return cache[n]
 
-n = 10
-print(f'\n_> fib({n}) = ', fibonacci_dp(n))
+num = 10
+print(f'\n_> fib({num}) = ', fibonacci_dp(num))
 
 
 
