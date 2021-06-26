@@ -53,11 +53,6 @@ for t in texts:
     telemarketer_ds['sent_text'].add(t[t_sending_num])
     telemarketer_ds['received_text'].add(t[t_receiving_num])
 
-"""
-- never send texts
-- never receive texts  
-- never receive incoming calls.
-"""
 made_call = telemarketer_ds['made_call']
 
 never_sent_texts = made_call.difference(telemarketer_ds['sent_text'])
@@ -68,6 +63,3 @@ possible_telemarketers = made_call.intersection(never_sent_texts, never_received
 possible_telemarketers = list(reversed(sorted(possible_telemarketers)))
 
 print(f'These numbers could be telemarketers: ', pretty(possible_telemarketers))
-
-
-# end of file

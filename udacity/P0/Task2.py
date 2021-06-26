@@ -31,7 +31,6 @@ for call in calls:
     map_caller[caller_1] += duration
     map_caller[caller_2] += duration
 
-
 num, most_time = '', 0
 for caller in map_caller:
     if map_caller[caller] > most_time:
@@ -39,7 +38,3 @@ for caller in map_caller:
         num = caller
 
 print(f'{num} spent the longest time, {most_time} seconds, on the phone during September 2016.')
-
-debug = 1
-
-# end of file

@@ -1,6 +1,5 @@
 import csv
 
-
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
     texts = list(reader)
@@ -9,7 +8,6 @@ with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
 
-
 """
 TASK 1:
 How many different telephone numbers are there in the records? 
@@ -17,7 +15,7 @@ Print a message:
 "There are <count> different telephone numbers in the records."
 """
 
-# I added a header row to the csv file
+# I added a header row to the csv file so here I remove it
 text_header_row = texts.pop(0)
 call_header_row = calls.pop(0)
 
@@ -37,4 +35,3 @@ for text in texts:
 total_numbers = len(text_set) + len(call_set)
 
 print(f'There are {total_numbers} different telephone numbers in the records.')
-

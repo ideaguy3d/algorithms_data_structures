@@ -1,0 +1,30 @@
+
+Task 0:
+- O(1) since there are no loops
+
+Task 1:
+- O(n1 + n2) since there are 2 loops
+
+Task 2:
+- O(n1 + n2) since there are 2 loops
+
+Task 3:
+- O(n) since there is 1 main loop.
+- O(2 * 3 * n):
+    2 since len(list_of_codes) is 2,
+    3 because there are 3 lines of code,
+    n for the inner-loop [i for i in list_of_codes[k]['code']]
+    so it'll become O(n^2)
+- therefore O(n1) + O(n2^2) i.e. O(n1 + n2^2)
+
+Task 4:
+- O(n1 + n2) since there are 2 loops
+
+
+
+
+
+
+
+
+# end of file
