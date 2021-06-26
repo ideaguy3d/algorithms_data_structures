@@ -44,26 +44,60 @@ class Tree:
     def get_root(self):
         return self.root
 
-n1 = Node('apple')
-n2 = Node('blue berry')
-n3 = Node('rasberry')
 
-print(f'n1 has left child? {n1.has_left_child()}')
-print(f'n2 has right child? {n1.has_right_child()}')
+class Stack:
+    def __init__(self):
+        self.list = list()
 
-print('\nadding left & right children\n')
-n1.set_left_child(n2)
-n1.set_right_child(n3)
+    def pop(self):
+        return self.list.pop()
 
-print(f'n1 has left child? {n1.has_left_child()}')
-print(f'n2 has right child? {n1.has_right_child()}')
+    def push(self, value):
+        self.list.append(value)
 
-tree = Tree('apple')
-tree.get_root().set_left_child(Node("banana"))
-tree.get_root().set_right_child(Node("cherry"))
-tree.get_root().get_left_child().set_left_child(Node("dates"))
+    def top(self):
+        if len(self.list) > 0:
+            return self.list[-1]
+        else:
+            return None
 
+    def is_empty(self):
+        return len(self.list) == 0
+
+    def __repr__(self):
+        if len(self.list) > 0:
+            s = "<top of stack>\n_________________\n"
+            s += "\n_________________\n".join([str(item) for item in self.list[::-1]])
+            s += "\n_________________\n<bottom of stack>"
+            return s
+        else:
+            return "<stack is empty>"
+
+
+def tree_practice():
+    tree = Tree('apple')
+    stack = Stack()
+    visit_order = list()
+
+    tree.get_root().set_left_child(Node("banana"))
+    tree.get_root().set_right_child(Node("cherry"))
+    tree.get_root().get_left_child().set_left_child(Node("dates"))
+
+
+def check_stack():
+    stack = Stack()
+    stack.push("apple")
+    stack.push("banana")
+    stack.push("cherry")
+    stack.push("dates")
+    print(stack.pop())
+    print("\n")
+    print(stack)
 
 debug = 1
+
+
+
+
 
 # end of file
