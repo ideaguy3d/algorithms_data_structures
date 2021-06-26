@@ -1,7 +1,3 @@
-"""
-Read file into texts and calls.
-It's ok if you don't understand how to read files.
-"""
 import csv
 import re
 import pprint
@@ -24,7 +20,7 @@ Fixed line numbers include parentheses, so Bangalore numbers
 have the form (080)xxxxxxx.)
 
 
-                ~ Part A ~ 
+                    ~ Part A ~ 
 Find all of the area codes and mobile prefixes called by people
 in Bangalore. In other words, the calls were initiated by "(080)" area code
 to the following area codes and mobile prefixes:
@@ -42,7 +38,7 @@ Print the answer as part of a message:
 The list of codes should be print out one per line in lexicographic order with no duplicates.
 
 
-                ~ Part B ~ 
+                    ~ Part B ~ 
 What percentage of calls from fixed lines in Bangalore are made
 to fixed lines also in Bangalore? In other words, of all the calls made
 from a number starting with "(080)", what percentage of these calls
@@ -93,10 +89,8 @@ for k in list_of_codes:
     bangalore_stat['all_codes_total'] += list_of_codes[k]['count']
     codes.extend(code_type_list)
 
+codes = sorted(codes)
 percentage = round(bangalore_stat['bangalore_count'] / bangalore_stat['all_codes_total'], 2)
 
 print(f'The numbers called by people in Bangalore have codes:\n', codes)
 print(f'\n\n{percentage} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.')
-
-
-debug = 1

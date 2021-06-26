@@ -1,9 +1,4 @@
-"""
-Read file into texts and calls.
-It's ok if you don't understand how to read files.
-"""
 import csv
-
 
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -23,7 +18,7 @@ Print messages:
 """
 
 
-# I added a header row to the csv file
+# I added a header row to the csv file, so I'm removing it here
 text_header_row = texts.pop(0)
 call_header_row = calls.pop(0)
 
