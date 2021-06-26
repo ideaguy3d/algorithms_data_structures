@@ -1,7 +1,3 @@
-"""
-Read file into texts and calls.
-It's ok if you don't understand how to read files.
-"""
 import csv
 import pprint
 
@@ -60,6 +56,8 @@ never_received_texts = made_call.difference(telemarketer_ds['received_text'])
 never_received_calls = made_call.difference(telemarketer_ds['received_call'])
 
 possible_telemarketers = made_call.intersection(never_sent_texts, never_received_texts, never_received_calls)
-possible_telemarketers = list(reversed(sorted(possible_telemarketers)))
+possible_telemarketers = list(sorted(possible_telemarketers))[:-1]
 
-print(f'These numbers could be telemarketers: ', pretty(possible_telemarketers))
+print('These numbers could be telemarketers:', )
+for n in possible_telemarketers:
+    print(n)

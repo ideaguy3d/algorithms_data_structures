@@ -20,4 +20,6 @@ csv
 .DS_STORE
 .DS_Store
 **/**/**/*.R
+**/**/**/*.r
 *.R
+*.r
