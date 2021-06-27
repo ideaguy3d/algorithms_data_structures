@@ -1,4 +1,3 @@
-
 class Node:
     def __init__(self, value=None):
         self.value = value
@@ -79,9 +78,54 @@ def tree_practice():
     stack = Stack()
     visit_order = list()
 
+    def info():
+        print(f"""
+visit_order {visit_order} 
+stack:
+{stack}
+        """)
+
     tree.get_root().set_left_child(Node("banana"))
     tree.get_root().set_right_child(Node("cherry"))
     tree.get_root().get_left_child().set_left_child(Node("dates"))
+
+    node = tree.get_root()
+    stack.push(node)
+    visit_order.append(node.get_value())
+
+    if node.has_left_child():
+        node = node.get_left_child()
+        stack.push(node)
+        visit_order.append(node.get_value())
+
+    if node.has_left_child():
+        node = node.get_left_child()
+        stack.push(node)
+        visit_order.append(node.get_value())
+
+    if node.has_left_child():
+        node = node.get_left_child()
+        stack.push(node)
+        visit_order.append(node.get_value())
+
+    print('--')
+    # check the results so far
+    info()
+    print('--')
+    # check if "dates" has a left child
+    print(f"{node} has left child? {node.has_left_child()}")
+    # since dates doesn't have a left child, we'll check if it has a right child
+    print(f"{node} has right child? {node.has_right_child()}")
+    # since "dates" is a leaf node (has no children), we can start to retrace our steps
+    # in other words, we can pop it off the stack.
+    print('stack.pop() = ', stack.pop())
+    print('stack = ', stack)
+    # now we'll set the node to the new top of the stack, which is banana
+    node = stack.top()
+    print(node)
+
+
+    debug = 1
 
 
 def check_stack():
@@ -94,10 +138,7 @@ def check_stack():
     print("\n")
     print(stack)
 
-debug = 1
 
-
-
-
+tree_practice()
 
 # end of file
