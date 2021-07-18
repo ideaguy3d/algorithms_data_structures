@@ -143,10 +143,45 @@ class BinarySearchTree:
                         break
                 else:
                     break  # both are the same
-    # end def
+    # end insert
+
+    def remove(self, value: int) -> Node:
+        def find_min(root: Node) -> Node:
+            while root.left:
+                root = root.left
+            return root
+
+        def delete_recursive(root: Node, c_value: int) -> Union[Node, None]:
+            if not root:
+                return None
+            elif c_value < root.value:
+                root.left = delete_recursive(root.left, c_value)
+            elif c_value > root.value:
+                root.right = delete_recursive(root.right, c_value)
+            else:
+                if not root.left and not root.right:
+                    return None
+                elif not root.left:
+                    root = root.right
+                    return root
+                elif not root.right:
+                    root = root.left
+                    return root
+                else:
+                    temp = find_min(root.right)
+                    root.value = temp.value
+                    root.right = delete_recursive(root.right, c_value)
+                    return root
+            return root
+
+        return delete_recursive(self.__root, value)
+    # end remove
+
+    def find_node(self, value: int):
+        pass
 
     def set_tree(self):
-        # convert to a simple dict
+        #TODO: convert to a simple dict
         self.tree = self.__root
 
     def get_structure(self):
