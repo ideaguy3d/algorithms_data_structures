@@ -1,4 +1,5 @@
 import unittest
+from typing import Any, Union
 
 
 class Node:
@@ -14,14 +15,13 @@ def output(value):
 
 
 class BinaryTree:
-    testing = True
+    testing = False
 
-    def __init__(self, c_root_node):
+    def __init__(self, c_root_node, testing=False):
         self.__root = c_root_node
+        self.testing = testing
 
     def preorder_traverse(self):
-        _list = []
-
         def preorder(node: Node):
             if not node: return
             _list.append(node.value)
@@ -29,6 +29,7 @@ class BinaryTree:
             preorder(node.left)
             preorder(node.right)
 
+        _list = []
         preorder(self.__root)
         return _list
 
@@ -45,32 +46,37 @@ class BinaryTree:
                 node_stack.append(node.left)
         return _list
 
-    def inorder_traverse(self):
+    def inorder_traverse(self) -> list:
         def inorder(node: Node):
             if not node: return
             inorder(node.left)
-            print(node.value)
+            _list.append(node.value)
+            if not self.testing: print(node.value)
             inorder(node.right)
 
+        _list = []
         inorder(self.__root)
+        return _list
 
     def inorder_traverse_iter(self):
         """
         result_1 = [10, 41, 40, 42, 45, 50, 75]
         :return:
         """
-        current, s, done = self.__root, [], False
+        current, stack, done, _list = self.__root, [], False, []
         while not done:
             if current is not None:
-                s.append(current)
+                stack.append(current)
                 current = current.left
             else:
-                if len(s):
-                    current = s.pop()
-                    print(current.value)
+                if len(stack):
+                    current = stack.pop()
+                    _list.append(current.value)
+                    if not self.testing: print(current.value)
                     current = current.right
                 else:
                     done = True
+        return _list
 
     def postorder_traverse(self):
         def postorder(node: Node):
@@ -108,19 +114,46 @@ class BinaryTree:
             if temp.right:
                 queue.append(temp.right)
     # end def
-# end class
 
 
-class TestBinaryTree(unittest.TestCase):
-    def test_preorder_traverse(self):
-        c_root_node = construct_binary_tree_1()
-        c_binary_tree = BinaryTree(c_root_node)
-        self.assertEqual(c_binary_tree.preorder_traverse(),
-                         [42, 41, 10, 40, 50, 45, 75])
+class BinarySearchTree:
+    tree: Union[Node, Any]
+
+    def __init__(self):
+        self.__root = None
+
+    def insert(self, value):
+        this_node = Node(value)
+        if not self.__root:
+            self.__root = this_node
+        else:
+            current_root = self.__root
+            while True:
+                if current_root.value > value:
+                    if current_root.left is not None:
+                        current_root = current_root.left
+                    else:
+                        current_root.left = this_node
+                        break
+                elif current_root.value < value:
+                    if current_root.right is not None:
+                        current_root = current_root.right
+                    else:
+                        current_root.right = this_node
+                        break
+                else:
+                    break  # both are the same
     # end def
 
+    def set_tree(self):
+        # convert to a simple dict
+        self.tree = self.__root
 
-def construct_binary_tree_1() -> Node:
+    def get_structure(self):
+        return self.__root
+
+
+def construct_binary_tree() -> Node:
     root = Node(42)
 
     root.left = Node(41)
@@ -135,17 +168,31 @@ def construct_binary_tree_1() -> Node:
     return root
 
 
-root_node = construct_binary_tree_1()
-binary_tree = BinaryTree(root_node)
+def construct_binary_search_tree() -> BinarySearchTree:
+    _list = [42, 41, 10, 40, 50, 45, 75]
+    bst = BinarySearchTree()
+    for i in _list:
+        bst.insert(i)
+    return bst.get_structure()
 
-# print('preorder traverse: ')
-t1 = binary_tree.preorder_traverse()
 
-# print('\npreorder traverse iterative: ')
-t2 = binary_tree.preorder_traverse_iter()
+utest = False
+if not utest:
+    binary_search_tree = construct_binary_search_tree()
+    br2 = 1
 
-preorder_implemented_correctly = 0
+    def run_binary_tree():
+        root_node = construct_binary_tree()
+        binary_tree = BinaryTree(root_node)
 
-br = 1
+        # print('preorder traverse: ')
+        t1 = binary_tree.preorder_traverse()
+
+        # print('\npreorder traverse iterative: ')
+        t2 = binary_tree.preorder_traverse_iter()
+
+        preorder_implemented_correctly = 0
+
+        br = 1
 
 # end of file
