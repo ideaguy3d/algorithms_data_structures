@@ -177,12 +177,17 @@ class BinarySearchTree:
         return delete_recursive(self.__root, value)
     # end remove
 
-    def find_node(self, value: int):
-        pass
-
-    def set_tree(self):
-        #TODO: convert to a simple dict
-        self.tree = self.__root
+    def find_node(self, value: int) -> bool:
+        current_root, found = self.__root, False
+        while current_root:
+            if value < current_root.value:
+                current_root = current_root.left
+            elif value > current_root.value:
+                current_root = current_root.right
+            else:  # we found a match
+                found = True
+                break
+        return found
 
     def get_structure(self):
         return self.__root
@@ -208,12 +213,14 @@ def construct_binary_search_tree() -> BinarySearchTree:
     bst = BinarySearchTree()
     for i in _list:
         bst.insert(i)
-    return bst.get_structure()
+    return bst
 
 
-utest = False
-if not utest:
+unit_testing = False
+if not unit_testing:
     binary_search_tree = construct_binary_search_tree()
+    find20 = binary_search_tree.find_node(20)
+    find42 = binary_search_tree.find_node(42)
     br2 = 1
 
     def run_binary_tree():
