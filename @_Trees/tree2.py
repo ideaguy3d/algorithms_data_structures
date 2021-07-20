@@ -116,10 +116,11 @@ class BinaryTree:
     # end def
 
 
-class BinarySearchTree:
+class BinarySearchTree(BinaryTree):
     tree: Union[Node, Any]
 
     def __init__(self):
+        super().__init__()
         self.__root = None
 
     def insert(self, value):
@@ -191,6 +192,53 @@ class BinarySearchTree:
 
     def get_structure(self):
         return self.__root
+
+
+class AVL_Tree(BinarySearchTree):
+    left = None
+    right = None
+
+    def __init__(self, value):
+        super().__init__()
+        self.value = value
+        self.depth = 1
+
+
+    def set_depth_based_on_children(self):
+        if self.node is None:
+            self.depth = 0
+        else:
+            self.depth = 1
+
+        if self.left is not None:
+            self.depth = self.left.depth + 1
+
+        if self.right is not None and self.depth <= self.right.depth:
+            self.depth = self.right.depth + 1
+
+    def rotateLL(self):
+        value_before = self.value
+        right_before = self.right
+        self.value = self.left.value
+
+        self.right = self.left
+        self.left = self.left.left
+        self.right.left = self.right.right
+        self.right.right = right_before
+        self.right.value = value_before
+
+        self.right.get_depth_from_children()
+        self.get_depth_from_children()
+
+    def rotateRR(self):
+        value_before = self.value
+        right_before = self.left
+
+
+
+
+
+# ~ Utilility Functions ~ #
 
 
 def construct_binary_tree() -> Node:
