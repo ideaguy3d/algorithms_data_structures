@@ -144,6 +144,7 @@ class BinarySearchTree(BinaryTree):
                         break
                 else:
                     break  # both are the same
+
     # end insert
 
     def remove(self, value: int) -> Node:
@@ -176,6 +177,7 @@ class BinarySearchTree(BinaryTree):
             return root
 
         return delete_recursive(self.__root, value)
+
     # end remove
 
     def find_node(self, value: int) -> bool:
@@ -195,14 +197,12 @@ class BinarySearchTree(BinaryTree):
 
 
 class AVL_Tree(BinarySearchTree):
-    left = None
-    right = None
-
     def __init__(self, value):
         super().__init__()
+        self.left = AVL_Tree
+        self.right = Union[AVL_Tree, None]
         self.value = value
         self.depth = 1
-
 
     def set_depth_based_on_children(self):
         if self.node is None:
@@ -231,16 +231,90 @@ class AVL_Tree(BinarySearchTree):
         self.get_depth_from_children()
 
     def rotateRR(self):
-        value_before = self.value
-        right_before = self.left
+        value_before, left_before = self.value, self.left
+        self.value = self.right.value
 
+        self.right = self.left
+        self.right = self.right.right
+        self.left.right = self.left.left
+        self.left.left = left_before
+        self.left.value = value_before
 
+        self.left.update_in_new_location()
+        self.update_in_new_location()
 
+    def balance(self):
+        ldepth = 0 if self.left is None else self.left.depth
+        rdepth = 0 if self.right is None else self.right.depth
+        if ldepth > rdepth + 1:
+            lldepth = 0 if self.left.left is None else self.left.left.depth
+            lrdepth = 0 if self.left.right is None else self.left.right.depth
+            if lldepth < lrdepth:
+                self.left.rotateRR()
+            self.rotateLL()
+        elif ldepth + 1 < rdepth:
+            rrdepth = 0 if self.right.right is None else self.right.right.depth
+            rldepth = 0 if self.right.left is None else self.right.left.depth
+            if rrdepth < rldepth:
+                self.right.rotateLL()
+            self.rotateRR()
+
+    def insert(self, value) -> bool:
+        child_inserted = False
+        if value == self.value:
+            return False
+        elif value < self.value:
+            if self.left is None:
+                self.left = AVL_Tree(value)
+                child_inserted = True
+            else:
+                # recursive call
+                child_inserted = self.left.insert(value)
+                if child_inserted: self.balance()
+        elif value > self.value:
+            if self.right is None:
+                self.right = AVL_Tree(value)
+                child_inserted = True
+            else:
+                # recursive call
+                child_inserted = self.right.insert(value)
+                if child_inserted: self.balance()
+        if child_inserted: self.set_depth_based_on_children()
+        return child_inserted
+
+    def remove(self, value):
+        def find_min(root):
+            while root.left: root = root.left
+            return root
+
+        def delete_recursive(root, c_value):
+            if not root:
+                return None
+            elif value < c_value:
+                root.left = delete_recursive(root.left, value)
+            elif value > c_value:
+                root.right = delete_recursive(root.right, value)
+            else:  # no children
+                if not root.left and not root.right:
+                    return None  # case 1
+                elif not root.left:
+                    root = root.right
+                    return root
+                elif not root.left:
+                    root = root.right
+                    return root
+                else:
+                    temp = find_min(root.right)
+                    root.value = temp.value
+                    root.right = delete_recursive(root.right, temp.value)
+                    return root
+            root.update_in_new_location()
+            return root
+
+        return delete_recursive(self, value)
 
 
 # ~ Utilility Functions ~ #
-
-
 def construct_binary_tree() -> Node:
     root = Node(42)
 
@@ -264,25 +338,36 @@ def construct_binary_search_tree() -> BinarySearchTree:
     return bst
 
 
-unit_testing = False
-if not unit_testing:
+def construct_avl_tree():
+    avl = AVL_Tree(1)
+    a_set = [2, 3, 4, 5, 123, 203, 2222]
+    for i in a_set:
+        avl.insert(i)
+    print(avl)
+    br = 1
+
+
+construct_avl_tree()
+
+
+def run_binary_tree():
     binary_search_tree = construct_binary_search_tree()
     find20 = binary_search_tree.find_node(20)
     find42 = binary_search_tree.find_node(42)
-    br2 = 1
 
-    def run_binary_tree():
-        root_node = construct_binary_tree()
-        binary_tree = BinaryTree(root_node)
+    root_node = construct_binary_tree()
+    binary_tree = BinaryTree(root_node)
 
-        # print('preorder traverse: ')
-        t1 = binary_tree.preorder_traverse()
+    # print('preorder traverse: ')
+    t1 = binary_tree.preorder_traverse()
 
-        # print('\npreorder traverse iterative: ')
-        t2 = binary_tree.preorder_traverse_iter()
+    # print('\npreorder traverse iterative: ')
+    t2 = binary_tree.preorder_traverse_iter()
 
-        preorder_implemented_correctly = 0
+    br = 1
 
-        br = 1
+
+
+
 
 # end of file
