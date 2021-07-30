@@ -52,5 +52,36 @@ def fibonacci_practice():
     debug = 1
 
 
+def practice2():
+    def kn(index, _weights, _values, _target):  #
+        if index <= -1 or _target <= 0:
+            result = 0
+        elif _weights[index] > _target:
+            result = kn(index - 1, _weights, _values, _target)
+        else:
+            v = kn(index - 1, _weights, _values, _target)
+            v_plus1 = _values[index] + kn(index - 1, _weights, _values, _target - _weights[index])
+            result = max(v, v_plus1)
+        return result
+
+    def kn2(index, c_target):
+        if index <= -1 or c_target <= 0:
+            result = 0
+        elif weights[index] > c_target:
+            result = kn2(index - 1, c_target)
+        else:
+            cur = kn2(index - 1, c_target)
+            cur_plus1 = values[index] + kn2(index - 1, c_target - weights[index])
+            result = max(cur, cur_plus1)
+        return result
+
+    weights = [1, 2, 4, 2, 5]
+    values = [5, 3, 5, 3, 2]
+    target = 10
+
+    kn(4, weights, values, target)
+
+
 general_practice()
+
 # end of file
