@@ -75,13 +75,31 @@ def practice2():
             result = max(cur, cur_plus1)
         return result
 
+    def kdp(index: int, c_target: int, matrix: dict):
+        h = str(index) + '_' + str(c_target)
+        if h in matrix:
+            return matrix[h]
+        elif index <= -1 or c_target <= 0:
+            result = 0
+        elif weights[index] > c_target:
+            result = kdp(index - 1, c_target, matrix)
+        else:
+            cur = kdp(index - 1, c_target, matrix)
+            cur_plus1 = values[index] + kdp(index - 1, c_target - weights[index], matrix)
+            result = max(cur, cur_plus1)
+        matrix[h] = result
+        return result
+
     weights = [1, 2, 4, 2, 5]
     values = [5, 3, 5, 3, 2]
     target = 10
 
-    kn(4, weights, values, target)
+    print('\nknd = ', kdp(4, target, {}))
+    print()
+    print('kn2 = ', kn2(4, target))
 
 
-general_practice()
+#general_practice()
+practice2()
 
 # end of file
