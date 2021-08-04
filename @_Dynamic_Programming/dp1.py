@@ -101,22 +101,59 @@ def knapsack_practice():
 
 
 def longest_common_subsequence_practice():
-    def lcs_n(str1, str2, str1_len, str2_len) -> int:
+    subsequence = ''
+    frame_count = 0
+    call_stack = []
+
+    def lcs_n(str1, str2, str1_len, str2_len, frame) -> int:
+        nonlocal subsequence, frame_count
+        frame_count += 1
         if str1_len == 0 or str2_len == 0:
             return 0
 
-        if str1[str1_len - 1] == str2[str2_len - 1]:
-            return 1 + lcs_n(str1, str2, str1_len - 1, str2_len - 1)
+        c1 = str1[str1_len - 1]
+        c2 = str2[str2_len - 1]
+        if c1 == c2:
+            call_stack.append({
+                'frame': frame,
+                'frame_count': frame_count,
+                'str1_len': str1_len,
+                'str2_len': str2_len,
+                'c1': c1,
+                'c2': c2
+            })
+            return 1 + lcs_n(str1, str2, str1_len - 1, str2_len - 1, frame + 1)
         else:
-            return max(
-                lcs_n(str1, str2, str1_len, str2_len - 1),
-                lcs_n(str1, str2, str1_len - 1, str2_len)
-            )
+            call_stack.append({
+                'frame': frame,
+                'frame_count': frame_count,
+                'str1_len': str1_len,
+                'str2_len': str2_len,
+                'c1': c1,
+                'c2': c2,
+            })
+            # rp = recursive parameter
+            rp1 = lcs_n(str1, str2, str1_len, str2_len - 1, frame + 1)
+
+            call_stack.append({
+                'frame': frame,
+                'frame_count': frame_count,
+                'str1_len': str1_len,
+                'str2_len': str2_len,
+                'c1': c1,
+                'c2': c2,
+                'rp1': rp1,
+            })
+            rp2 = lcs_n(str1, str2, str1_len, str2_len - 1, frame + 1)
+
+            return max(rp1, rp2)
 
     def lcs_init(str1, str2) -> int:
-        return lcs_n(str1, str2, len(str1), len(str2))
+        return lcs_n(str1, str2, len(str1), len(str2), 0)
 
     print("lcs_init('AGGTAB', 'GXTXAYB') = ", lcs_init('AGGTAB', 'GXTXAYB'))
+    print()
+    print(subsequence)
 
 
 longest_common_subsequence_practice()
