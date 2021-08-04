@@ -151,7 +151,22 @@ def longest_common_subsequence_practice():
     def lcs_init(str1, str2) -> int:
         return lcs_n(str1, str2, len(str1), len(str2), 0)
 
-    print("lcs_init('AGGTAB', 'GXTXAYB') = ", lcs_init('AGGTAB', 'GXTXAYB'))
+    def lcs_dp(str1, str2):
+        row_len = len(str1)
+        col_len = len(str2)
+        matrix = [[0] * col_len for _ in range(row_len)]
+
+        for r, row in enumerate(matrix):
+            for c, col in enumerate(row):
+                if str1[r - 1] == str2[c - 1]:
+                    matrix[r][c] = 1 + matrix[r - 1][c - 1]
+                else:
+                    matrix[r][c] = max(matrix[r - 1][c], matrix[r][c - 1])
+
+        return matrix[row_len - 1][col_len - 1]
+
+    # print("lcs_init('AGGTAB', 'GXTXAYB') = ", lcs_init('AGGTAB', 'GXTXAYB'))
+    print("lcs_dp('AGGTAB', 'GXTXAYB') = ", lcs_dp('AGGTAB', 'GXTXAYB'))
     print()
     print(subsequence)
 
