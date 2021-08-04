@@ -1,4 +1,3 @@
-import unittest
 from typing import Any, Union
 
 
@@ -116,7 +115,7 @@ class BinaryTree:
     # end def
 
 
-class BinarySearchTree(BinaryTree):
+class BinarySearchTree:
     tree: Union[Node, Any]
 
     def __init__(self):
@@ -196,18 +195,19 @@ class BinarySearchTree(BinaryTree):
         return self.__root
 
 
-class AVL_Tree(BinarySearchTree):
+# noinspection PyUnresolvedReferences
+class AVL_Tree:
+    #left: int
+
     def __init__(self, value):
-        super().__init__()
-        self.left = AVL_Tree
-        self.right = Union[AVL_Tree, None]
+        #super().__init__()
+        self.left = None
+        self.right = None
         self.value = value
         self.depth = 1
 
-    def set_depth_based_on_children(self):
-        if self.node is None:
-            self.depth = 0
-        else:
+    def __set_depth_based_on_children(self):
+        if self.depth is None:  # self.value ?
             self.depth = 1
 
         if self.left is not None:
@@ -216,7 +216,7 @@ class AVL_Tree(BinarySearchTree):
         if self.right is not None and self.depth <= self.right.depth:
             self.depth = self.right.depth + 1
 
-    def rotateLL(self):
+    def __rotateLL(self):
         value_before = self.value
         right_before = self.right
         self.value = self.left.value
@@ -228,36 +228,37 @@ class AVL_Tree(BinarySearchTree):
         self.right.value = value_before
 
         self.right.get_depth_from_children()
-        self.get_depth_from_children()
+        self.__set_depth_based_on_children()
 
-    def rotateRR(self):
+    def __rotateRR(self):
         value_before, left_before = self.value, self.left
         self.value = self.right.value
 
-        self.right = self.left
+        self.left = self.right
         self.right = self.right.right
         self.left.right = self.left.left
         self.left.left = left_before
         self.left.value = value_before
 
-        self.left.update_in_new_location()
-        self.update_in_new_location()
+        self.left.__set_depth_based_on_children()
+        self.__set_depth_based_on_children()
 
-    def balance(self):
-        ldepth = 0 if self.left is None else self.left.depth
-        rdepth = 0 if self.right is None else self.right.depth
-        if ldepth > rdepth + 1:
-            lldepth = 0 if self.left.left is None else self.left.left.depth
-            lrdepth = 0 if self.left.right is None else self.left.right.depth
-            if lldepth < lrdepth:
+    def __balance(self):
+        l_depth = 0 if self.left is None else self.left.depth
+        r_depth = 0 if self.right is None else self.right.depth
+        if l_depth > r_depth + 1:
+            ll_depth = 0 if self.left.left is None else self.left.left.depth
+            lr_depth = 0 if self.left.right is None else self.left.right.depth
+
+            if ll_depth < lr_depth:
                 self.left.rotateRR()
-            self.rotateLL()
-        elif ldepth + 1 < rdepth:
-            rrdepth = 0 if self.right.right is None else self.right.right.depth
-            rldepth = 0 if self.right.left is None else self.right.left.depth
-            if rrdepth < rldepth:
+            self.__rotateLL()
+        elif l_depth + 1 < r_depth:
+            rr_depth = 0 if self.right.right is None else self.right.right.depth
+            rl_depth = 0 if self.right.left is None else self.right.left.depth
+            if rr_depth < rl_depth:
                 self.right.rotateLL()
-            self.rotateRR()
+            self.__rotateRR()
 
     def insert(self, value) -> bool:
         child_inserted = False
@@ -270,7 +271,8 @@ class AVL_Tree(BinarySearchTree):
             else:
                 # recursive call
                 child_inserted = self.left.insert(value)
-                if child_inserted: self.balance()
+                if child_inserted:
+                    self.__balance()
         elif value > self.value:
             if self.right is None:
                 self.right = AVL_Tree(value)
@@ -278,8 +280,10 @@ class AVL_Tree(BinarySearchTree):
             else:
                 # recursive call
                 child_inserted = self.right.insert(value)
-                if child_inserted: self.balance()
-        if child_inserted: self.set_depth_based_on_children()
+                if child_inserted:
+                    self.__balance()
+        if child_inserted:
+            self.__set_depth_based_on_children()
         return child_inserted
 
     def remove(self, value):
@@ -308,7 +312,7 @@ class AVL_Tree(BinarySearchTree):
                     root.value = temp.value
                     root.right = delete_recursive(root.right, temp.value)
                     return root
-            root.update_in_new_location()
+            root.__set_depth_based_on_children()
             return root
 
         return delete_recursive(self, value)
@@ -365,9 +369,5 @@ def run_binary_tree():
     t2 = binary_tree.preorder_traverse_iter()
 
     br = 1
-
-
-
-
 
 # end of file

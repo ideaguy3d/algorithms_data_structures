@@ -32,4 +32,8 @@ class TestBinaryTree(unittest.TestCase):
     # end def
 
 
+class TestAVLTree(unittest.TestCase):
+    pass
+
+
 # end of file

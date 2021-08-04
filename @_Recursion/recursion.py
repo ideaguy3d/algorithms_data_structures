@@ -22,24 +22,24 @@ def factorial(n):
     return n * factorial(n - 1)
 
 
-def reverse_string(input):
-    if len(input) == 0:
+def reverse_string(c_input):
+    if len(c_input) == 0:
         return ''
     else:
-        first_char = input[0]
+        first_char = c_input[0]
         the_rest = slice(1, None)
-        sub_string = input[the_rest]
+        sub_string = c_input[the_rest]
         reverse = reverse_string(sub_string)
         return reverse + first_char
 
 
-def is_palindrome(input):
-    if len(input) <= 1:
+def is_palindrome(c_input):
+    if len(c_input) <= 1:
         return True
     else:
-        first_char = input[0]
-        last_char = input[-1]
-        sub_str = input[1:-1]
+        first_char = c_input[0]
+        last_char = c_input[-1]
+        sub_str = c_input[1:-1]
         return (first_char == last_char) and is_palindrome(sub_str)
 
 
