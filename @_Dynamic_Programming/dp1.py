@@ -52,7 +52,8 @@ def fibonacci_practice():
     debug = 1
 
 
-def practice2():
+def knapsack_practice():
+    # k = knapsack problem
     def kn(index, _weights, _values, _target):  #
         if index <= -1 or _target <= 0:
             result = 0
@@ -79,7 +80,7 @@ def practice2():
         h = str(index) + '_' + str(c_target)
         if h in matrix:
             return matrix[h]
-        elif index <= -1 or c_target <= 0:
+        if index <= -1 or c_target <= 0:
             result = 0
         elif weights[index] > c_target:
             result = kdp(index - 1, c_target, matrix)
@@ -99,7 +100,25 @@ def practice2():
     print('kn2 = ', kn2(4, target))
 
 
-#general_practice()
-practice2()
+def longest_common_subsequence_practice():
+    def lcs_n(str1, str2, str1_len, str2_len) -> int:
+        if str1_len == 0 or str2_len == 0:
+            return 0
+
+        if str1[str1_len - 1] == str2[str2_len - 1]:
+            return 1 + lcs_n(str1, str2, str1_len - 1, str2_len - 1)
+        else:
+            return max(
+                lcs_n(str1, str2, str1_len, str2_len - 1),
+                lcs_n(str1, str2, str1_len - 1, str2_len)
+            )
+
+    def lcs_init(str1, str2) -> int:
+        return lcs_n(str1, str2, len(str1), len(str2))
+
+    print("lcs_init('AGGTAB', 'GXTXAYB') = ", lcs_init('AGGTAB', 'GXTXAYB'))
+
+
+longest_common_subsequence_practice()
 
 # end of file
