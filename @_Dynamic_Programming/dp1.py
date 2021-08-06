@@ -100,12 +100,14 @@ def knapsack_practice():
     print('kn2 = ', kn2(4, target))
 
 
+# TODO: spend more time understanding this!
 def longest_common_subsequence_practice():
     subsequence = ''
     frame_count = 0
     call_stack = []
 
     def lcs_n(str1, str2, str1_len, str2_len, frame) -> int:
+        # TODO: spend more time understanding this!
         nonlocal subsequence, frame_count
         frame_count += 1
         if str1_len == 0 or str2_len == 0:
@@ -133,7 +135,7 @@ def longest_common_subsequence_practice():
                 'c2': c2,
             })
             # rp = recursive parameter
-            rp1 = lcs_n(str1, str2, str1_len, str2_len - 1, frame + 1)
+            rp1 = lcs_n(str1, str2, str1_len - 1, str2_len, frame + 1)
 
             call_stack.append({
                 'frame': frame,
@@ -152,6 +154,7 @@ def longest_common_subsequence_practice():
         return lcs_n(str1, str2, len(str1), len(str2), 0)
 
     def lcs_dp(str1, str2):
+        # TODO: spend more time understanding this!
         row_len = len(str1)
         col_len = len(str2)
         matrix = [[0] * col_len for _ in range(row_len)]
@@ -170,7 +173,6 @@ def longest_common_subsequence_practice():
     print()
     print(subsequence)
 
-
-longest_common_subsequence_practice()
+# longest_common_subsequence_practice()
 
 # end of file
