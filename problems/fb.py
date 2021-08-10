@@ -2,7 +2,6 @@ from typing import List
 from collections import OrderedDict
 import pprint
 
-
 pretty = pprint.PrettyPrinter.pprint
 
 test2 = 'ABA'
@@ -24,7 +23,7 @@ def get_wrong_answers(n: int, c: str) -> str:
     switch_letter(n, c)
     if n < 0:
         return RESULT
-    return get_wrong_answers(n-1, c)
+    return get_wrong_answers(n - 1, c)
 
 
 def battle_ship_practice():
@@ -58,10 +57,39 @@ def battle_ship_practice():
     debug_point = 1
 
 
+def cafeteria_practice():
+    N = 10
+    K = 1
+    M = 2
+    S = [2, 6]
 
-battle_ship_practice()
-#get_wrong_answers(len(test1), test1)
+    class Cafeteria:
+        def __init__(self, n, k, m, s):
+            self.n = n
+            self.k = k
+            self.m = m
+            self.s = s
 
+        def get_max_additional_diner_count(self) -> int:
+            a = [n for n in range(1, 11)]
+            tracker = [0 for _ in range(self.m)]
+            for i in self.s:
+                pos = self.s.index(i)
+                bound = [x for x in range(self.k)]
+                tracker[-self.k:pos] = 0
+                tracker[self.k:pos] = 0
+            return 0
+
+    def get_max_addtional_diner_count(n: int, k: int, m: int, s: List[int]) -> int:
+        caf = Cafeteria(n, k, m, s)
+        return caf.get_max_additional_diner_count()
+
+    get_max_addtional_diner_count(N, K, M, S)
+
+
+cafeteria_practice()
+# battle_ship_practice()
+# get_wrong_answers(len(test1), test1)
 
 
 #
