@@ -168,11 +168,29 @@ def longest_common_subsequence_practice():
 
         return matrix[row_len - 1][col_len - 1]
 
-    # print("lcs_init('AGGTAB', 'GXTXAYB') = ", lcs_init('AGGTAB', 'GXTXAYB'))
-    print("lcs_dp('AGGTAB', 'GXTXAYB') = ", lcs_dp('AGGTAB', 'GXTXAYB'))
+    def lcs_dp2(str1, str2):
+        """ This Python implementation of the JavaScript dynamic programming
+         longest common subsequence should work """
+        row_len, col_len = len(str1), len(str2)
+        matrix = [[0] * (col_len + 1) for _ in range(row_len+1)]
+        for row in range(1, row_len+1):
+            for col in range(1, col_len+1):
+                if str1[row-1] == str2[col-1]:
+                    matrix[row][col] = 1 + matrix[row-1][col-1]
+                else:
+                    matrix[row][col] = max(matrix[row-1][col], matrix[row][col-1])
+        b173 = 1
+        return matrix[row_len][col_len]
+
+        # print("lcs_init('AGGTAB', 'GXTXAYB') = ", lcs_init('AGGTAB', 'GXTXAYB'))
+
+
+    print("lcs_dp2('abcd', 'bc') = ", lcs_dp2('abcd', 'bc'))
+    # GTAB
+    print("lcs_dp('AGGTAB', 'GXTXAYB') = ", lcs_dp2('AGGTAB', 'GXTXAYB'))
     print()
     print(subsequence)
 
-# longest_common_subsequence_practice()
+longest_common_subsequence_practice()
 
 # end of file
