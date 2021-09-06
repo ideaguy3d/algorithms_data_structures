@@ -59,7 +59,7 @@ class Solution2:
 
 class Solution:
     @staticmethod
-    def isStrobogrammatic(self, num: str) -> bool:
+    def isStrobogrammatic(num: str) -> bool:
         sb = []  # string builder
 
         for c in reversed(num):
