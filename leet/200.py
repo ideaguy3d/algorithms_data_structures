@@ -6,7 +6,7 @@ class Solution:
         count = 0
         row_len = len(grid)
         col_len = len(grid[0])
-
+        
         def dfs(r, c):
             grid[r][c] = '0'
             if r - 1 >= 0 and grid[r - 1][c] == '1':

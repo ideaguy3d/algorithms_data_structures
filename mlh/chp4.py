@@ -1,4 +1,8 @@
 """
+Spent a bunch of hours reading:
+"Python Algorithms: Mastering Basic Algorithms in the Python Language, Second Edition" by Magnus Lie Hetland
+from https://learning.oreilly.com but there was too much explanation and not enough code.
+
 reduction,
 induction,
 recursion,
