@@ -21,10 +21,21 @@ class WebCrawler:
                     self.discovered_sites.append(url)
                     que.append(url)
 
-    def get_links(self, url) -> list:
-        pass
+    @staticmethod
+    def get_links(html) -> list:
+        return re.findall(r"https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+", html)
 
-    def read_html(self, url) -> str:
-        pass
+    @staticmethod
+    def read_html(url) -> str:
+        try:
+            html = requests.get(url).text
+            return html
+        except Exception as e:
+            print(e)
+
+
+if __name__ == '__main__':
+    crawler = WebCrawler()
+    crawler.crawl('https://www.cnn.com')
 
 #
