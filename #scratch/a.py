@@ -13,7 +13,7 @@ df = {
 
 def practice_open():
     for country in df:
-        xf = open(country['old'], 'r')
+        xf = open(df[country]['old'], 'r')
         xf_info = xf.readlines()
         b18 = 1
 
@@ -26,8 +26,20 @@ def _date_practice(node=None):
     print(d1)
 
 
+def bit_practice():
+    x = 2
+    y = 14
+    print(bin(x))
+    print(bin(y))
+    print(bin(x & y))
+    z = x & y
+    print(bin(x & y), z)
+
+
+
+bit_practice()
 #_date_practice()
-practice_open()
+# practice_open()
 
 
 
