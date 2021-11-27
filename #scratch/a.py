@@ -36,13 +36,15 @@ def bit_practice():
     print(bin(x & y), z)
 
 
+def p1():
+    arr = [[0, 1], [0, 2], [0, 3], [1, 4]]
+    for a, b in arr:
+        print(a, b)
 
-bit_practice()
-#_date_practice()
+p1()
+# bit_practice()
+# _date_practice()
 # practice_open()
-
-
-
 
 
 #
