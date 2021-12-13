@@ -101,8 +101,8 @@ class UnionFind3:  # Quick Union by Rank
         return self.find(x) == self.find(y)
 
 
-class UnionFind:
-    """ Union Find / Disjoin Set 1st implementation from memory """
+class UnionFind4:
+    """ Union Find / Disjoint Set 1st implementation from memory """
     def __init__(self, size):
         self.root = [i for i in range(size)]
         self.rank = [1] * size
@@ -129,8 +129,22 @@ class UnionFind:
         return self.find(x) == self.find(y)
 
 
+class DisjointSet1:
+    def __init__(self, n):
+        pass
+
+    def union(self, x, y):
+        pass
+
+    def find(self, x):
+        pass
+
+    def connected(self, x, y):
+        pass
+
+
 def use_uf1():
-    uf = UnionFind(10)
+    uf = UnionFind1(10)
     # 1-2-5-6-7
     uf.union(1, 2)
     uf.union(2, 5)
@@ -155,4 +169,4 @@ def use_uf1():
 
 
 
-#
+# end of file
