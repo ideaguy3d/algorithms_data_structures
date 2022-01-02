@@ -1,12 +1,10 @@
-"""
-Binary Search
-"""
 import unittest
 from typing import List
 
 
 class Solution:
     """ Linear Scan """
+
     @staticmethod
     def findPeakElement(nums: List[int]) -> int:
         n_len = len(nums)
@@ -28,5 +26,7 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(s.findPeakElement([1, 2, 1, 3, 5, 6, 4]), 1, "Test that input returns index 1")
 
 
+if __name__ == '__main__':
+    unittest.main(verbosity=3)
 
 # end of file
