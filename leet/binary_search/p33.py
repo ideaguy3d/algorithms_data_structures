@@ -12,10 +12,14 @@ class Solution1:
     - space:
     - time:
     """
-
     def search(self, nums: List[int], target: int) -> int:
-        # TODO: implement solution1
-        pass
+        def find_rotate_index():
+            pass
+
+        def search():
+            pass
+
+        return -1
 
 
 class Solution2:
