@@ -2,6 +2,7 @@
 topics
 - dynamic programming
 - combinations & permutations
+- memoization
 """
 import unittest
 
@@ -53,10 +54,10 @@ class Test_Solutions(unittest.TestCase):
         pass
 
     def test_s3(self):
-        s3 = Solution3
-        self.assertEqual(s3.climbStairs(6), 13, 'input 6 returns 13')
-        self.assertEqual(s3.climbStairs(2), 2, 'input 2 returns 2')
-        self.assertEqual(s3.climbStairs(3), 3, 'input 3 returns 3')
+        s = Solution3
+        self.assertEqual(s.climbStairs(6), 13, 'input 6 returns 13')
+        self.assertEqual(s.climbStairs(2), 2, 'input 2 returns 2')
+        self.assertEqual(s.climbStairs(3), 3, 'input 3 returns 3')
 
 
 if __name__ == '__main__':
