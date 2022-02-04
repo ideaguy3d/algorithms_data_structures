@@ -41,7 +41,12 @@ def p1():
     for a, b in arr:
         print(a, b)
 
-p1()
+
+def bisect_practice():
+    pass
+
+
+# p1()
 # bit_practice()
 # _date_practice()
 # practice_open()
