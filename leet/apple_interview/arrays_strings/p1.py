@@ -24,7 +24,7 @@ class Solution1a:
             _map[num] = i
 
 
-# template
+# TODO: use a numpy array for nums since it's homogeous
 class Solution1b:
     @staticmethod
     def twoSum(nums: List[int], target: int) -> Tuple[int, int]:

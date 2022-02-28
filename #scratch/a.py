@@ -42,10 +42,17 @@ def p1():
         print(a, b)
 
 
+def single_line_lambda():
+    _list = [1, 2, -5, 4]
+    # wrap a lambda in () to make it a 1 liner
+    x = [(lambda x: x % 2 == 1)(num) for num in _list]
+    print(x)
+
+
 def bisect_practice():
     pass
 
-
+single_line_lambda()
 # p1()
 # bit_practice()
 # _date_practice()
