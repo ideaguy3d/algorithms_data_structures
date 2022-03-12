@@ -315,6 +315,7 @@ print("Pass" if (is_palindrome("madam")) else "Fail")
 print("Pass" if (is_palindrome("abba")) else "Fail")
 print("Pass" if not (is_palindrome("Udacity")) else "Fail")
 """
+
 print("\n")
 
 # end of file

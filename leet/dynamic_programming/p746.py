@@ -1,7 +1,10 @@
 """
 topics
 - dynamic programming
-- arrays 
+- arrays
+
+recurrence relation:
+f(n) = min(minCost[n-1]+cost[n-1], minCost[n-2]+cost[n-2])
 """
 import unittest
 from typing import List

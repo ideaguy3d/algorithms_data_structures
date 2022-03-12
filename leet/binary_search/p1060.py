@@ -2,7 +2,7 @@ import unittest
 from typing import List
 
 
-class Solution1:
+class Solution1a:
     @staticmethod
     def missingElement(nums: List[int], k: int) -> int:
         def missing(idx):
@@ -35,9 +35,8 @@ class TestSolutions(unittest.TestCase):
     [1,2,4]
     3
     """
-
     def test_s1(self):
-        s = Solution1
+        s = Solution1a
         self.assertEqual(s.missingElement([4, 7, 9, 10], 1), 5, "Test input returns 5")
         self.assertEqual(s.missingElement([4, 7, 9, 10], 3), 8, "Test input return 8")
         self.assertEqual(s.missingElement([1,2,4], 3), 6, "Test when k is greater than last element")
