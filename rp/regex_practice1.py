@@ -9,8 +9,8 @@ def practice1():
     r2 = re.search(r'[0-9]+', s2)
     print('found ', r2.group())
     s3 = 'ab324, cccc23b and f44aaa'
-    r3 = re.search(r'[0-9]+', s3)
-    print('found ', r3.group())
+    r3 = re.search(r'([0-9]+)', s3)
+    print('found ', r3.groups())
     b1 = 1
 
 
