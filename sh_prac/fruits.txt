@@ -1,4 +1,0 @@
-perceptron
-bannana 
-btree
-apple
