@@ -1,0 +1,38 @@
+
+		~ Main Commands ~
+- grep 
+  - filter output based on regex
+- head, tail -n
+  - first or last number from output
+- wc 
+  - word count or line count, -l -c 
+- cat 
+  - output file contents to terminal
+- sed 
+  - string replacement based on regex
+- sort
+- uniq -c
+- cut -d -f
+- bc, expr 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
