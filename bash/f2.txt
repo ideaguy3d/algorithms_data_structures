@@ -1,0 +1,9 @@
+perceptron
+carrot
+apple
+carrot
+bannana 
+lime
+btree
+apple
+carrot
